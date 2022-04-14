@@ -1,0 +1,27 @@
+@import "../../style/_variables.scss";
+
+.countryItem {
+  width: 80%;
+  margin: 50px 0 50px 0;
+  box-shadow: 0px 0px 24px -20px rgba(66, 68, 90, 1);
+  .countryItem__img {
+    height: 200px;
+    width: 100%;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+  }
+  .countryItem__data {
+    font-size: 17px;
+    padding: 20px 0 0 20px;
+    .country__data__name {
+      margin: 0 0 20px 0;
+    }
+    .countryItem__title {
+      font-weight: bold;
+      .countryItem__result {
+        color: $Dark_Gray;
+        line-height: 170%;
+      }
+    }
+  }
+}
