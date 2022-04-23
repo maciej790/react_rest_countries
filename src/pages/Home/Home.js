@@ -1,24 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import styles from "../Home/Home.module.scss";
-import { useAllCountries } from "../../hooks/useAllCountries";
+import { useCountry } from "../../hooks/useCountry";
 import CountryItem from "../../components/CountryItem/CountryItem";
 
 function Home() {
-  const { getData, data, isLoading, isError } = useAllCountries();
+  const [query, setQuery] = useState("https://restcountries.com/v3.1/all");
+  const { getData, data, isLoading, isError } = useCountry();
 
-  getData("https://restcountries.com/v3.1/all");
+  const searchByInput = (e) => {
+    if (e.target.value) {
+      setQuery(`https://restcountries.com/v3.1/name/${e.target.value}`);
+    }
+  };
 
-  if (isLoading) {
-    return <h1>Loading...</h1>;
-  } else if (isError) {
-    return <h1>Error!</h1>;
-  }
+  const searchBySelect = (e) => {
+    if (e.target.value) {
+      setQuery(`https://restcountries.com/v3.1/region/${e.target.value}`);
+    }
+  };
+
+  getData(query);
 
   return (
     <main className={styles.wrapper}>
-      <SearchForm />
+      <SearchForm handleInput={searchByInput} handleSelect={searchBySelect} />
       <section className={styles.wrapper__country}>
+        {isLoading ? <h1>Loading...</h1> : isError ? <h1>Error!</h1> : null}
         {data && !isLoading && !isError
           ? data.map((country) => (
               <CountryItem country={country} key={country.cca3} />

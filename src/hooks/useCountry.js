@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react/cjs/react.development";
 
-export const useAllCountries = () => {
+export const useCountry = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [data, setData] = useState([]);
@@ -21,7 +21,7 @@ export const useAllCountries = () => {
       } finally {
         setIsLoading(false);
       }
-    }, []);
+    }, [url]);
   };
 
   return {
